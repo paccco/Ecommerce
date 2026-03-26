@@ -1,0 +1,30 @@
+{% extends "layouts/base.njk" %}
+
+{% block title %}Catálogo de Productos{% endblock %}
+
+{% block content %}
+    <h2>Catálogo</h2>
+    
+    {% if products.length > 0 %}
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="card">
+                    {% if product.imageUrl %}
+                        <img src="{{ product.imageUrl }}" alt="{{ product.name }}" style="width:100%; height:200px; object-fit:cover;">
+                    {% else %}
+                        <div style="width:100%; height:200px; background:#ddd; display:flex; align-items:center; justify-content:center;">Sin Imagen</div>
+                    {% endif %}
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                    <p><strong>${{ product.price }}</strong></p>
+                    <form action="/carrito/agregar" method="POST">
+                        <input type="hidden" name="productId" value="{{ product.id }}">
+                        <button type="submit" class="btn">Agregar al Carrito</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay productos disponibles en este momento.</p>
+    {% endif %}
+{% endblock %}

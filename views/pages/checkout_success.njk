@@ -1,0 +1,11 @@
+{% extends "layouts/base.njk" %}
+
+{% block title %}Compra Exitosa{% endblock %}
+
+{% block content %}
+    <h2>¡Gracias por tu compra, {{ user.email }}!</h2>
+    <div class="alert" style="background-color: #d4edda; color: #155724;">
+        Tu pedido con número de orden <strong>#{{ order.id }}</strong> ha sido registrado correctamente con un total de <strong>${{ order.total }}</strong>.
+    </div>
+    <a href="/productos" class="btn">Seguir Comprando</a>
+{% endblock %}

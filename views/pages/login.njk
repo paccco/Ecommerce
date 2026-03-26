@@ -1,0 +1,32 @@
+{% extends "layouts/base.njk" %}
+{% block title %}Iniciar Sesión{% endblock %}
+{% block content %}
+<div style="max-width: 400px; margin: 3rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center; margin-top: 0; color: #333;">Inicia Sesión</h2>
+  
+  {% if error %}
+    <div class="alert" style="background:#f8d7da; color:#721c24; padding:0.8rem; border-radius:4px; margin-bottom:1rem; border-left: 4px solid #f5c6cb;">
+      {{ error }}
+    </div>
+  {% endif %}
+  
+  <form action="/auth/login" method="POST" style="display: flex; flex-direction: column; gap: 1.2rem;">
+    <div>
+      <label for="email" style="font-weight: bold; color: #555;">Correo Electrónico:</label>
+      <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    </div>
+    
+    <div>
+      <label for="password" style="font-weight: bold; color: #555;">Contraseña:</label>
+      <input type="password" id="password" name="password" placeholder="••••••••" required style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    </div>
+    
+    <button type="submit" class="btn" style="width: 100%; background: #007bff; padding: 0.8rem; font-size: 1.1rem; border:none; color:white; border-radius:4px; cursor:pointer;" onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='#007bff'">Ingresar a mi Cuenta</button>
+  </form>
+  
+  <p style="text-align: center; margin-top: 2rem; color: #666;">
+    ¿No tienes una cuenta? <br>
+    <a href="/auth/register" style="color: #007bff; font-weight: bold; text-decoration: none;">Crea una cuenta gratuita aquí</a>
+  </p>
+</div>
+{% endblock %}

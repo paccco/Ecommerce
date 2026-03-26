@@ -1,0 +1,59 @@
+{% extends "layouts/base.njk" %}
+
+{% block title %}Mi Carrito de Compras{% endblock %}
+
+{% block content %}
+    <h2>Mi Carrito</h2>
+    
+    {% if added %}
+    <div class="alert" style="background-color: #d4edda; color: #155724; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem; border-left: 4px solid #c3e6cb;">
+        ✅ <strong>¡Éxito!</strong> El producto fue añadido a tu carrito correctamente.
+    </div>
+    {% endif %}
+    
+    {% if cartItems.length > 0 %}
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem; background: white; padding: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <thead>
+                <tr style="background: #eee; text-align: left;">
+                    <th style="padding: 1rem;">Producto</th>
+                    <th style="padding: 1rem;">Precio</th>
+                    <th style="padding: 1rem;">Cantidad</th>
+                    <th style="padding: 1rem;">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cartItems %}
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 1rem;">{{ item.product.name }}</td>
+                        <td style="padding: 1rem;">${{ item.product.price }}</td>
+                        <td style="padding: 1rem;">{{ item.quantity }}</td>
+                        <td style="padding: 1rem;">${{ item.subtotal }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" style="padding: 1rem; text-align: right;"><strong>Total:</strong></td>
+                    <td style="padding: 1rem;"><strong>${{ total }}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+            <form action="/carrito/vaciar" method="POST">
+                <button type="submit" class="btn" style="background: #dc3545;">Vaciar Carrito</button>
+            </form>
+            
+            <form action="/carrito/checkout" method="POST">
+                <button type="submit" class="btn" style="background: #28a745;">Proceder al Pago</button>
+            </form>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 4rem 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-top: 2rem;">
+            <div style="font-size: 5rem; margin-bottom: 1rem;">🛒</div>
+            <h3 style="color: #333; font-size: 1.5rem; margin-bottom: 0.5rem;">Tu carrito está temporalmente vacío</h3>
+            <p style="color: #666; margin-bottom: 2rem;">¡Aún no has agregado ningún producto! Vuelve al catálogo para descubrir nuestras ofertas.</p>
+            <a href="/productos" class="btn" style="background-color: #007bff; padding: 0.8rem 2rem; font-size: 1.1rem; border-radius: 30px; text-decoration: none; color: white;">Explorar el Catálogo</a>
+        </div>
+    {% endif %}
+{% endblock %}
