@@ -1,0 +1,29 @@
+// test-api.http
+### Obtener todos los productos (con paginacion y ordenacion)
+GET http://localhost:3000/api/productos?desde=1&hasta=5&ordenacion=descendente
+
+### Obtener producto por ID
+GET http://localhost:3000/api/productos/2
+
+### Añadir un nuevo producto
+POST http://localhost:3000/api/productos
+Content-Type: application/json
+
+{
+    "name": "Pikachu Especial",
+    "description": "Figura rara de Pikachu.",
+    "price": 25.50,
+    "imageUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+    "stock": 5
+}
+
+### Actualizar un producto existente
+PUT http://localhost:3000/api/productos/2
+Content-Type: application/json
+
+{
+    "price": 29.99
+}
+
+### Eliminar un producto
+DELETE http://localhost:3000/api/productos/1

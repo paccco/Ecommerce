@@ -23,7 +23,7 @@
         <nav style="display: flex; align-items: center; gap: 1.5rem;">
             <a href="/productos">Catálogo</a>
             {% if user %}
-                <a href="/carrito" style="background-color: #ff9900; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; color: #111; display:flex; gap: 0.5rem;"><span style="font-size:1.1rem;">🛒</span> Ver mi Carrito</a>
+                <a href="/carrito" id="btnOpenCart" style="background-color: #ff9900; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; color: #111; display:flex; gap: 0.5rem;"><span style="font-size:1.1rem;">🛒</span> Ver mi Carrito</a>
                 <a href="/auth/logout" style="border: 1px solid #dc3545; color: #ffcccc; padding: 0.4rem 0.8rem; border-radius: 4px;">Cerrar Sesión ({{ user.email }})</a>
             {% else %}
                 <a href="/auth/login">Iniciar Sesión</a>
@@ -37,7 +37,93 @@
     </main>
     
     <footer>
-        &copy; 2026 Node Ecommerce Automático.
+        <p>&copy; 2026 Node Ecommerce MPA. Desarrollado con Express y Nunjucks.</p>
     </footer>
+
+    <!-- Offcanvas Carrito (DOM Fetching) -->
+    <div id="offcanvasCart" style="position: fixed; right: -400px; top: 0; width: 400px; max-width: 100%; height: 100vh; background: white; box-shadow: -2px 0 5px rgba(0,0,0,0.2); transition: right 0.3s ease; z-index: 1000; display: flex; flex-direction: column;">
+        <div style="padding: 1.5rem; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; background: #f8f9fa;">
+            <h3 style="margin: 0; padding: 0; color: #333;">🛒 Mi Carrito</h3>
+            <button id="closeCartBtn" style="background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #666;">&times;</button>
+        </div>
+        <div id="offcanvasCartBody" style="flex: 1; overflow-y: auto; padding: 1.5rem; color: #333;">
+            <!-- Se llenará vía JS con la API y el Template -->
+        </div>
+        <div style="padding: 1.5rem; border-top: 1px solid #ddd; text-align: right; background: #f8f9fa;">
+            <strong style="font-size: 1.2rem; color: #333;">Total: $<span id="offcanvasCartTotal">0.00</span></strong>
+            <br><br>
+            <a href="/carrito" class="btn" style="background: #28a745; color: white; width: 100%; padding: 0.8rem; text-align: center; display: block; box-sizing: border-box; text-decoration: none; border-radius: 4px; font-weight: bold;">Proceder al Pago Seguro</a>
+        </div>
+    </div>
+
+    <!-- Template HTML nativo -->
+    <template id="cart-item-template">
+        <div class="cart-item" style="display: flex; gap: 1rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem; align-items: center;">
+            <img src="" class="item-img" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+            <div style="flex: 1; text-align: left;">
+                <h5 class="item-name" style="margin: 0 0 0.2rem 0; font-size: 1rem; color: #333;"></h5>
+                <span class="item-price" style="color: #666; font-weight: bold;"></span> <span style="color: #999;">x</span> <span class="item-quantity" style="color: #666;"></span>
+            </div>
+            <button class="item-delete-btn" style="background: #dc3545; color: white; border: none; padding: 0.4rem 0.6rem; border-radius: 4px; cursor: pointer;" title="Eliminar">-</button>
+        </div>
+    </template>
+
+    <script>
+        const btnOpenCart = document.getElementById('btnOpenCart');
+        const offcanvasCart = document.getElementById('offcanvasCart');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartBody = document.getElementById('offcanvasCartBody');
+        const cartTotal = document.getElementById('offcanvasCartTotal');
+        const template = document.getElementById('cart-item-template');
+
+        if(btnOpenCart) {
+            btnOpenCart.addEventListener('click', async (e) => {
+                e.preventDefault();
+                offcanvasCart.style.right = '0';
+                await loadCart();
+            });
+        }
+
+        if(closeCartBtn) {
+            closeCartBtn.addEventListener('click', () => {
+                offcanvasCart.style.right = '-400px';
+            });
+        }
+
+        async function loadCart() {
+            try {
+                cartBody.innerHTML = '<p style="text-align:center; color:#666;">Cargando carrito...</p>';
+                const res = await fetch('/api/carrito');
+                const json = await res.json();
+                
+                if(!json.success || !json.data.items || json.data.items.length === 0) {
+                    cartBody.innerHTML = '<p style="text-align:center; color:#666; margin-top:2rem;">Tu carrito está vacío.</p>';
+                    cartTotal.textContent = '0.00';
+                    return;
+                }
+
+                cartBody.innerHTML = '';
+                cartTotal.textContent = json.data.total.toFixed(2);
+
+                json.data.items.forEach(item => {
+                    const clone = template.content.cloneNode(true);
+                    clone.querySelector('.item-img').src = item.product.imageUrl || 'https://via.placeholder.com/50';
+                    clone.querySelector('.item-name').textContent = item.product.name;
+                    clone.querySelector('.item-price').textContent = '$' + item.product.price.toFixed(2);
+                    clone.querySelector('.item-quantity').textContent = item.quantity;
+                    
+                    const deleteBtn = clone.querySelector('.item-delete-btn');
+                    deleteBtn.addEventListener('click', async () => {
+                        await fetch('/api/carrito/' + item.product.id, { method: 'DELETE' });
+                        await loadCart(); // Recargar tras borrar
+                    });
+
+                    cartBody.appendChild(clone);
+                });
+            } catch (e) {
+                cartBody.innerHTML = '<p style="color:red;">Error al cargar el carrito.</p>';
+            }
+        }
+    </script>
 </body>
 </html>

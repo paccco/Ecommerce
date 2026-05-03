@@ -10,20 +10,25 @@
     </div>
   {% endif %}
   
-  <form action="/auth/register" method="POST" style="display: flex; flex-direction: column; gap: 1.2rem;">
+  <form action="/auth/register" method="POST" style="display: flex; flex-direction: column; gap: 1.2rem;" novalidate>
     <div>
       <label for="name" style="font-weight: bold; color: #555;">Nombre completo:</label>
-      <input type="text" id="name" name="name" placeholder="Tu nombre" required style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+      <input type="text" id="name" name="name" autofocus placeholder="Tu nombre" required style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
     </div>
     
     <div>
       <label for="email" style="font-weight: bold; color: #555;">Correo Electrónico:</label>
       <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+      <small class="error-msg" style="color: #dc3545; display: none;">Por favor ingresa un correo válido.</small>
     </div>
     
     <div>
       <label for="password" style="font-weight: bold; color: #555;">Contraseña:</label>
-      <input type="password" id="password" name="password" minlength="6" placeholder="Mínimo 6 caracteres" required style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+      <div style="display: flex; position: relative;">
+          <input type="password" id="password" name="password" minlength="6" placeholder="Mínimo 6 caracteres" required style="width: 100%; padding: 0.8rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+          <button type="button" id="togglePassword" style="position: absolute; right: 10px; top: 18px; background: none; border: none; cursor: pointer; color: #666;">👁</button>
+      </div>
+      <small class="error-msg" style="color: #dc3545; display: none;">La contraseña debe tener al menos 6 caracteres.</small>
     </div>
     
     <button type="submit" class="btn" style="width: 100%; background: #28a745; padding: 0.8rem; font-size: 1.1rem; border:none; color:white; border-radius:4px; cursor:pointer;" onmouseover="this.style.background='#218838'" onmouseout="this.style.background='#28a745'">Completar Registro</button>
@@ -33,4 +38,29 @@
     ¿Ya tienes cuenta? <a href="/auth/login" style="color: #28a745; font-weight: bold; text-decoration: none;">Inicia sesión</a>
   </p>
 </div>
+
+<script>
+  // UX Toggle Password
+  const togglePassword = document.getElementById('togglePassword');
+  const password = document.getElementById('password');
+  togglePassword.addEventListener('click', () => {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      togglePassword.textContent = type === 'password' ? '👁' : '🙈';
+  });
+
+  // UX Validations on Blur
+  const emailInput = document.getElementById('email');
+  emailInput.addEventListener('blur', () => {
+      const isValid = emailInput.checkValidity();
+      emailInput.style.borderColor = isValid ? '#28a745' : '#dc3545';
+      emailInput.nextElementSibling.style.display = isValid ? 'none' : 'block';
+  });
+
+  password.addEventListener('blur', () => {
+      const isValid = password.checkValidity();
+      password.style.borderColor = isValid ? '#28a745' : '#dc3545';
+      password.parentElement.nextElementSibling.style.display = isValid ? 'none' : 'block';
+  });
+</script>
 {% endblock %}

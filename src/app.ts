@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import { logger } from './utils/logger.js';
 import authRoutes from './routes/auth.routes.js';
@@ -21,6 +22,8 @@ const app: Application = express();
 // Middlewares globales
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(cors());
 app.use(cookieParser());
 
 // Configuración de Sesiones
@@ -55,7 +58,7 @@ nunjucks.configure(path.join(__dirname, '../views'), {
 app.set('view engine', 'njk');
 
 // Rutas modulares y REST API
-app.use('/api/v1', apiRoutes);
+app.use('/api', apiRoutes);
 app.use('/', webRoutes);
 app.use('/carrito', cartRoutes);
 app.use('/auth', authRoutes);
