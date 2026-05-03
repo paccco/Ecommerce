@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Tarea 8</title>
+	<link rel="stylesheet" href="Tarea%208_files/bulma.min.css">
+	<link rel="stylesheet" href="Tarea%208_files/github.min.css">
+	<script src="Tarea%208_files/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script src="Tarea%208_files/bash.min.js"></script>
+<script src="Tarea%208_files/javascript.min.js"></script>
+<script src="Tarea%208_files/twig.min.js"></script> 
+<script src="Tarea%208_files/markdown.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+	pre {
+		background-color: #FEFEFE;
+	}
+	code {
+		padding: 0 0 0 0 !important;
+	}
+	h3, h4, h5 {
+		padding-bottom: 0.5rem;
+		padding-top: 1rem;
+		font-weight: 500 !important;
+	}
+</style>
+</head>
+
+<body>
+<div class="container has-text-justified">
+	
+	<figure class="image">
+		<img style="width: 90%; height: 18rem; margin-left: 3vw; margin-top: 0px;padding-bottom: 1rem" src="Tarea%208_files/mapa_dom.jpg">
+	</figure>
+	<br>
+	<div class="content is-medium">
+		<h3 class="">Tarea 8: Mejorando UX, carrito con DOM </h3>
+		<p>
+			En esta tarea mejoremos la UX de la pantalla de loging siguiendo alguno de los consejos de 
+			<a href="https://www.learnui.design/blog/tips-signup-login-ux.html"> 15 Tips for Better Signup / Login UX</a>:
+			</p><ul>
+				<li>Use specialized mobile keyboards</li>
+				<li>Autofocus on the first field</li>
+				<li>Make labels clickable</li>
+				<li>Add exmaple text in placeholder</li>
+				<li>Use button text to expose the value waiting for users on the other side</li> 
+				<li>Let users see their password</li>
+				<li>Validate fields on blur</li>
+				<li>Show password requirements when users are choosing a password</li>
+				<li>If the user guesses an invalid password, say why it’s invalid</li>
+			</ul>
+		<p></p>
+		<br>
+		<h4>Carrito con DOM</h4>
+		<p>
+			Y también haremos botón para mostrar el carrito de la tienda con un <a href="https://getbootstrap.com/docs/5.0/components/offcanvas/">offcanvas</a>.
+			Poner solamente una funcionalidad parcial: mostrar los productos, y 
+eliminarlos del carrito. Para esto habrá que hacer antes un API <i>ad hoc</i>.
+		</p>
+		<p>
+			Para hacer html dentro del offcanvas, usar <a href="https://developer.mozilla.org/es/docs/Web/HTML/Reference/Elements/template">HTML template</a>
+			y <a href="https://developer.mozilla.org/es/docs/Web/API/Node/cloneNode">cloneNode()</a>, como en 
+			<a href="https://derekpcollins.com/blog/using-the-html-template-element">Using the HTML &lt;template&gt; element</a>
+		</p>
+		<br> <br>
+		
+		<h6>Referencias:</h6>
+		<ul>
+			<li><a href="https://www.guvi.in/blog/guide-for-html-dom/">Mastering the DOM: A Guide to the HTML Document Object Model [2024]</a></li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus">HTMLElement: focus() method</a></li>
+			<li><a href="https://www.javascripttutorial.net/javascript-dom/javascript-toggle-password-visibility/">How to Toggle Password Visibility</a></li>
+			<li><a href="https://www.geeksforgeeks.org/how-to-use-the-javascript-fetch-api-to-get-data/">How To Use JavaScript Fetch API To Get Data?</a></li>
+			<li><a href="https://derekpcollins.com/blog/using-the-html-template-element">Using the HTML &lt;template&gt; element</a></li>
+		</ul>
+		<br><br>
+	</div>
+</div>
+
+</body></html>

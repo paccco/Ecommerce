@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Tarea 9</title>
+	<link rel="stylesheet" href="Tarea%209_files/bulma.min.css">
+	<link rel="stylesheet" href="Tarea%209_files/github.min.css">
+	<script src="Tarea%209_files/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script src="Tarea%209_files/bash.min.js"></script>
+<script src="Tarea%209_files/javascript.min.js"></script>
+<script src="Tarea%209_files/twig.min.js"></script> 
+<script src="Tarea%209_files/markdown.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+	pre {
+		background-color: #FEFEFE;
+	}
+	code {
+		padding: 0 0 0 0 !important;
+	}
+	h3, h4 {
+		padding-bottom: 0.5rem;
+		padding-top: 1rem;
+		font-weight: 500 !important;
+	}
+	h5, h6 {
+		padding-top: 2rem;
+		font-weight: 500 !important;
+	}
+</style>
+</head>
+
+<body>
+<div class="container has-text-justified">
+	
+	<figure class="image">
+		<img style="width: 90%; height: 18rem; margin-left: 3vw; margin-top: 0px;padding-bottom: 1rem" src="Tarea%209_files/image.png">
+	</figure>
+	<br>
+	<div class="content is-medium">
+		<h3 class="">Tarea 9: SPA con Vite, React y Tailwind</h3>
+		<p>
+			En esta tarea haremos un pequeño front con dos componentes
+			<a href="https://learn.microsoft.com/es-es/windows/dev-environment/javascript/react-overview">React</a>.
+			Uno mostrará una imagen desde una api externa, y el otro desde el api de la tienda.
+			</p>
+			<p>
+			Empezaremos también a utilizar
+			<a href="https://dev.to/chasehuber/what-the-heck-is-tailwind-css-and-should-i-use-it-557d">Tailwind CSS</a>, que
+			veremos mas a fondo en el resto del curso.
+		</p>
+		<p>
+			Utilizaremos <a href="https://es.vite.dev/guide/">Vite</a> como servidor de desarrollo.
+		</p>
+		<h5>Instalación</h5>
+		<p>
+			Instalamos primero <a href="https://vite.dev/guide/#getting-started">Vite</a> escogiendo las opciones de 
+			<i>TypeScript</i> y <i>React</i>. A continuación añadimos <code>Tailwind</code> como pone en 
+			<a href="https://tailwindcss.com/docs/installation/using-vite">Get started with Tailwind CSS</a>.
+			Para instalar tipos de letra de google en tailwind, se cambia <b>index.css</b>:
+</p><pre><code class="language-javascript hljs" data-highlighted="yes">@<span class="hljs-keyword">import</span> <span class="hljs-title function_">url</span>(<span class="hljs-string">"https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;family=EB+Garamond:ital@0;1&amp;display=swap"</span>);
+@<span class="hljs-keyword">import</span> <span class="hljs-string">"tailwindcss"</span>;
+	
+@theme {
+  --font-<span class="hljs-attr">montserrat</span>: <span class="hljs-string">"Montserrat"</span>, sans-serif; 
+};</code></pre>
+y ya se puede utilizar p.e.:
+<pre><code class="language-twig hljs" data-highlighted="yes"><span class="language-xml">...
+<span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"font-montserrat"</span>&gt;</span> Galeria de Tienda Prado <span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+...</span></code></pre>
+		<p></p>
+		<h5>CORS</h5>
+		<p>
+			Previamente prepararemos otro end point que sirva imágenes aleatorias de desde el serivor de la tienda.
+			El API no funcionará debido a que está servido desde un puerto 
+			del vite, distinto del de servidor. Estas llamadas no se aceptan debido al 
+			<a href="https://www.arsys.es/blog/cors-que-es-como-funciona-y-configuracion">CORS</a>. 
+			Para poder utilizarlo durante el desarrollo habrá que <a href="https://expressjs.com/en/resources/middleware/cors.html">
+				configurarlo en el servidor</a>.
+		</p>
+		<h5>App.tsx</h5>
+		<p>
+			El componente principal queda:
+			</p><pre><code class="language-twig hljs" data-highlighted="yes"><span class="language-xml"> // App.tsx
+import Perritos from './components/Perritos.tsx'
+import Cuadros from './components/Cuadros.tsx'
+
+function App() {
+  return (
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"flex gap-2 items-center justify-center h-screen font-montserrat"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Perritos</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Cuadros</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  )
+}
+export default App</span></code></pre>
+		<p></p>
+
+		<h5>&lt;Perritos /&gt; imagen de perrito aleatoria</h5>
+		<p>
+			Seguimos <a href="https://www.escuelafrontend.com/data-fetching-con-react">
+				Data Fetching con React Usando usestate y useEffect
+			</a>.
+		</p>
+
+		<h5>&lt;Cuadros /&gt;, con la librería swr</h5>
+		<p>
+			En este segundo componente se verá una imagen aleatoria de la teinda, pero usando 
+			esta vez la librería <a href="https://swr.vercel.app/docs/getting-started">swr</a>. 
+			Este hook simplifica mucho el uso de <code>fetch()</code>. Para que recarge con un botón:
+</p><pre><code class="language-javascript hljs" data-highlighted="yes"><span class="hljs-comment">// ./components/Cuadros.txs</span>
+...	
+<span class="hljs-keyword">const</span> { data, error, isLoading, mutate } = <span class="hljs-title function_">useSWR</span>(url, fetcher)
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">Recarga</span> = (<span class="hljs-params"></span>) =&gt; { <span class="hljs-title function_">mutate</span>() }
+...
+&lt;button onClick={<span class="hljs-title class_">Recarga</span>} 
+        className=<span class="hljs-string">"font-bold cursor-pointer bg-olive-300 p-4 rounded-2xl hover:bg-olive-400 text-gray-500"</span>&gt;
+	¡<span class="hljs-title class_">Otro</span>! <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span> 🎨 <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+&lt;/button&gt;
+...</code></pre>			
+
+		<p></p>
+
+		<h6>Referencias:</h6>
+		<ul>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">
+				Cross-Origin Resource Sharing (CORS)
+			</a></li>
+			<li><a href="https://www.reactjs.wiki/que-es-el-strict-mode-en-react">
+				¿Qué es el `StrictMode` en React?
+			</a></li>
+			<li><a href="https://medium.com/@finnkumar6/why-capitalizing-your-react-components-is-a-must-uncovering-the-magic-behind-jsx-7f3d537ad8c3">
+				Why Capitalizing Your React Components is a Must: Uncovering the Magic Behind JSX
+			</a></li>
+			<li><a href="https://tailwindcss.com/docs/font-family#customizing-your-theme">
+				font-family: Customizing your theme
+			</a></li>
+		</ul>
+		<br><br>
+	</div>
+</div>
+
+</body></html>

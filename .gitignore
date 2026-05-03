@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno (Seguridad Tarea 3 y 6)
+.env
+
+# Compilación
+dist/
+
+# Logs (Tarea 5)
+*.log
+logs/
+
+# Prisma (Si generas el cliente fuera de node_modules)
+/prisma/generated/
+/prisma/migrations/*.db
+/prisma/migrations/*.db-journal
+
+# OS
+.DS_Store
+Thumbs.db
