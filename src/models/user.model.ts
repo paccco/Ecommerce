@@ -10,7 +10,11 @@ export class UserModel {
   }
 
   static verifyPassword(passwordPlain: string, hashed: string): boolean {
+    if (!hashed || !hashed.includes(':')) {
+      return passwordPlain === hashed;
+    }
     const [salt, key] = hashed.split(':');
+    if (!salt || !key) return false;
     const hashBuffer = crypto.scryptSync(passwordPlain, salt, 64);
     const keyBuffer = Buffer.from(key, 'hex');
     return crypto.timingSafeEqual(hashBuffer, keyBuffer);

@@ -1,0 +1,31 @@
+---
+import LayoutPrado from '../layouts/LayoutPrado.astro';
+import productos from '../../data/productos.json';
+import CardProducto from '../components/CardProducto.astro';
+
+const p = productos.slice(0, 12);
+---
+
+<LayoutPrado title="Tienda Prado Pokémon - Productos Destacados">
+  <div class="flex flex-col gap-12 items-center">
+    {/* Page Header */}
+    <section class="text-center max-w-xl">
+      <h1 class="font-garamond text-5xl text-[#2E2B2A] tracking-[0.1em] mb-4 uppercase">Destacados</h1>
+      <div class="w-16 h-[1px] bg-amber-900/40 mx-auto mb-4"></div>
+      <p class="font-garamond italic text-gray-500 text-sm leading-relaxed">
+        Una cuidada selección de especímenes Pokémon históricos en su forma estática definitiva, preparados con el mayor rigor artístico.
+      </p>
+    </section>
+
+    {/* Product Grid */}
+    <section class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 gap-y-12 pt-4">
+      {p.map((prod) => (
+        <CardProducto 
+          título={prod.título} 
+          texto_precio={prod.texto_precio} 
+          imagen={prod.imagen} 
+        />
+      ))}
+    </section>
+  </div>
+</LayoutPrado>

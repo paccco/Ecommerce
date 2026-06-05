@@ -1,0 +1,74 @@
+[
+  {
+    "título": "Pikachu",
+    "texto_precio": "$25.00",
+    "imagen": "pikachu.png",
+    "descripcion": "El Pokémon de tipo eléctrico más famoso, listo para brillar en tu equipo."
+  },
+  {
+    "título": "Charizard",
+    "texto_precio": "$85.00",
+    "imagen": "charizard.png",
+    "descripcion": "Un imponente dragón escupefuego con cañones de calor devastadores."
+  },
+  {
+    "título": "Bulbasaur",
+    "texto_precio": "$18.00",
+    "imagen": "bulbasaur.png",
+    "descripcion": "Lindo tipo planta que lleva un bulbo que crece junto a él."
+  },
+  {
+    "título": "Squirtle",
+    "texto_precio": "$20.00",
+    "imagen": "squirtle.png",
+    "descripcion": "Tortuga de agua capaz de disparar chorros de agua a gran presión."
+  },
+  {
+    "título": "Eevee",
+    "texto_precio": "$30.00",
+    "imagen": "eevee.png",
+    "descripcion": "Un Pokémon de genética inestable capaz de evolucionar en múltiples formas."
+  },
+  {
+    "título": "Mewtwo",
+    "texto_precio": "$150.00",
+    "imagen": "mewtwo.png",
+    "descripcion": "El legendario Pokémon clonado artificialmente con habilidades psíquicas incomparables."
+  },
+  {
+    "título": "Snorlax",
+    "texto_precio": "$45.00",
+    "imagen": "snorlax.png",
+    "descripcion": "Le encanta comer y dormir todo el día. Muy perezoso pero sumamente resistente."
+  },
+  {
+    "título": "Gengar",
+    "texto_precio": "$50.00",
+    "imagen": "gengar.png",
+    "descripcion": "Una sombra traviesa de tipo fantasma que acecha en la oscuridad."
+  },
+  {
+    "título": "Lucario",
+    "texto_precio": "$65.00",
+    "imagen": "lucario.png",
+    "descripcion": "Es capaz de leer el aura de sus oponentes y predecir sus movimientos."
+  },
+  {
+    "título": "Jigglypuff",
+    "texto_precio": "$12.00",
+    "imagen": "jigglypuff.png",
+    "descripcion": "Canta una melodía misteriosa capaz de dormir a cualquier audiencia."
+  },
+  {
+    "título": "Dragonite",
+    "texto_precio": "$90.00",
+    "imagen": "dragonite.png",
+    "descripcion": "Un dragón bondadoso capaz de volar a altas velocidades al rededor del globo."
+  },
+  {
+    "título": "Gardevoir",
+    "texto_precio": "$55.00",
+    "imagen": "gardevoir.png",
+    "descripcion": "Elegante y protector, capaz de desatar agujeros negros psíquicos para proteger a su entrenador."
+  }
+]

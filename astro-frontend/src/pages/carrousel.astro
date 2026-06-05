@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CarrouselSSG from '../components/CarrouselSSG.tsx';
+import productos from '../../data/productos.json';
+---
+
+<Layout title="PokeAstro - Carrusel SSG">
+  <div class="max-w-5xl mx-auto py-8">
+    <CarrouselSSG productos={productos} client:load />
+  </div>
+</Layout>

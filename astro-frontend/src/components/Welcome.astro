@@ -1,0 +1,85 @@
+---
+// Custom welcome component with DaisyUI Collapse / Accordion
+---
+
+<div class="max-w-4xl mx-auto px-4 py-12 text-center animate-fade-in">
+  {/* Badge & Title */}
+  <div class="inline-block bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded-full text-sm font-bold mb-4 tracking-wide uppercase font-montserrat">
+    Astro + React Islands
+  </div>
+  
+  <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight font-montserrat mb-6">
+    Bienvenido a PokeAstro
+  </h1>
+  
+  <p class="text-lg text-gray-650 max-w-2xl mx-auto font-light leading-relaxed mb-12">
+    Esta es la sección híbrida de nuestra plataforma. Combina la velocidad inigualable del **Static Site Generation (SSG)** con componentes interactivos de React integrados mediante **Astro Islands (Astro Hibridación)**.
+  </p>
+
+  {/* Description Accordion using DaisyUI Collapse */}
+  <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-150 text-left max-w-2xl mx-auto space-y-4">
+    <h3 class="text-xl font-bold text-gray-800 font-montserrat mb-4 border-b border-gray-100 pb-2">
+      Instrucciones de Navegación 📖
+    </h3>
+
+    {/* Collapse Item 1 */}
+    <div class="collapse collapse-arrow bg-slate-50 border border-slate-200/60 rounded-2xl">
+      <input type="radio" name="my-accordion-1" checked="checked" /> 
+      <div class="collapse-title text-sm font-bold text-slate-800 font-montserrat">
+        🛸 ¿Qué es la Hibridación de Astro Islands?
+      </div>
+      <div class="collapse-content text-xs text-gray-600 leading-relaxed font-light">
+        <p>
+          Las "islas" son componentes interactivos individuales (como nuestro carrusel de Swiper hecho en React) incrustados en una página HTML estática. Astro sirve HTML puro por defecto y solo carga e hidrata el Javascript de la isla cuando se especifica una directiva como `client:load` o `client:visible`.
+        </p>
+      </div>
+    </div>
+
+    {/* Collapse Item 2 */}
+    <div class="collapse collapse-arrow bg-slate-50 border border-slate-200/60 rounded-2xl">
+      <input type="radio" name="my-accordion-1" /> 
+      <div class="collapse-title text-sm font-bold text-slate-800 font-montserrat">
+        🎠 ¿Cómo probar el Carrusel React?
+      </div>
+      <div class="collapse-content text-xs text-gray-600 leading-relaxed font-light">
+        <p>
+          Navega a la sección **Carrusel React** en el menú. En esa página, el componente carrusel de la Tarea 10 se carga e hidrata dinámicamente sobre la base estática de Astro. Podrás arrastrar y deslizar las diapositivas de Pokémon al instante.
+        </p>
+      </div>
+    </div>
+
+    {/* Collapse Item 3 */}
+    <div class="collapse collapse-arrow bg-slate-50 border border-slate-200/60 rounded-2xl">
+      <input type="radio" name="my-accordion-1" /> 
+      <div class="collapse-title text-sm font-bold text-slate-800 font-montserrat">
+        🛍️ ¿Cómo funciona el SSG Prado?
+      </div>
+      <div class="collapse-content text-xs text-gray-600 leading-relaxed font-light">
+        <p>
+          Bajo la sección **SSG Prado**, cargamos un catálogo boutique con estilo clásico. Las páginas de detalle de cada producto están pre-renderizadas estáticamente en el momento de compilación a través de `getStaticPaths` alimentado por un dataset JSON local, lo que permite cargas instantáneas y SEO óptimo.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* CTA Cards */}
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto mt-12">
+    <a 
+      href="/carrousel" 
+      class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-3xl cursor-pointer hover:shadow-2xl hover:scale-[1.02] transition duration-300 text-left block"
+    >
+      <span class="text-3xl block mb-2">🎠</span>
+      <h4 class="text-lg font-bold font-montserrat">Carrusel React</h4>
+      <p class="text-emerald-100 text-xs mt-1 font-light">Prueba la isla de React hidratada en vivo.</p>
+    </a>
+
+    <a 
+      href="/ssg" 
+      class="bg-gradient-to-br from-amber-500 to-amber-600 text-white p-6 rounded-3xl cursor-pointer hover:shadow-2xl hover:scale-[1.02] transition duration-300 text-left block"
+    >
+      <span class="text-3xl block mb-2">🏛️</span>
+      <h4 class="text-lg font-bold font-montserrat">SSG Prado</h4>
+      <p class="text-amber-100 text-xs mt-1 font-light">Explora las fichas estáticas pre-renderizadas.</p>
+    </a>
+  </div>
+</div>

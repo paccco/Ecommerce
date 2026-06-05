@@ -1,0 +1,32 @@
+---
+interface Props {
+  título: string;
+  texto_precio: string;
+  imagen: string;
+}
+
+const { título, texto_precio, imagen } = Astro.props;
+---
+
+<div class="group flex flex-col items-center bg-white p-6 rounded-2xl border border-amber-900/5 hover:border-amber-900/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+  <div class="w-full h-48 bg-[#FAF8F5] rounded-xl flex items-center justify-center p-4 relative overflow-hidden mb-5">
+    <img 
+      src={`/images/${imagen}`} 
+      alt={título} 
+      class="max-w-[80%] max-h-[85%] object-contain group-hover:scale-105 transition-transform duration-300 z-10 filter drop-shadow-md"
+    />
+    <div class="absolute inset-0 bg-gradient-to-tr from-amber-50/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+  </div>
+
+  <div class="text-center w-full">
+    <h3 class="font-garamond italic text-xl text-gray-800 group-hover:text-amber-800 transition tracking-wide mb-2 line-clamp-1">{título}</h3>
+    <span class="font-montserrat text-xs uppercase tracking-widest font-semibold text-amber-700">{texto_precio}</span>
+  </div>
+
+  <a 
+    href={`/productos/${título.toLowerCase()}`}
+    class="mt-4 w-full bg-amber-900 text-white font-montserrat text-[10px] uppercase tracking-widest font-bold py-2 rounded-lg text-center hover:bg-amber-800 hover:shadow-md transition duration-300"
+  >
+    Detalle
+  </a>
+</div>

@@ -1,0 +1,63 @@
+---
+import '../../src/styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Tienda Prado - Colección Destacados" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-[#FCFAF7] flex flex-col antialiased text-[#2E2B2A] selection:bg-amber-100">
+    {/* Premium boutique Header */}
+    <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-amber-900/10 shadow-sm">
+      <div class="max-w-6xl mx-auto px-8 h-20 flex items-center justify-between">
+        <a href="/" class="flex flex-col text-left group">
+          <span class="font-garamond italic text-2xl tracking-widest text-amber-900 group-hover:text-amber-700 transition">Tienda Pokémon</span>
+          <span class="text-[9px] uppercase tracking-[0.25em] text-gray-400 font-montserrat">Edición de Coleccionista</span>
+        </a>
+
+        <nav class="flex items-center gap-6 font-montserrat text-xs uppercase tracking-widest">
+          <a 
+            href="/" 
+            class="py-2 text-[#2E2B2A] hover:text-amber-700 transition font-medium"
+          >
+            Portada
+          </a>
+          <a 
+            href="/carrousel" 
+            class="py-2 text-[#2E2B2A] hover:text-amber-700 transition font-medium"
+          >
+            Galería React
+          </a>
+          <a 
+            href="/ssg" 
+            class="py-2 text-amber-900 hover:text-amber-700 transition font-bold border-b border-amber-900"
+          >
+            Prado Destacados
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    {/* Elegant Content Wrapper */}
+    <div class="flex-grow max-w-6xl w-full mx-auto px-8 py-12">
+      <slot />
+    </div>
+
+    {/* Classic Footer */}
+    <footer class="bg-white border-t border-amber-900/10 py-12 text-center text-xs tracking-wider text-gray-500 uppercase font-montserrat">
+      <p class="font-medium text-amber-900">Tienda Pokémon — SSG Edición Limitada</p>
+      <p class="mt-3 text-[10px] text-gray-400 tracking-[0.2em]">Desarrollado con Astro 6 & React 19. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

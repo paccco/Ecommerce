@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Astro Pokémon" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-slate-50 flex flex-col font-sans antialiased text-gray-800">
+    {/* Elegant Header */}
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200/80">
+      <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 transition hover:opacity-90">
+          <span class="text-2xl">🛸</span>
+          <span class="font-extrabold text-xl text-emerald-600 tracking-tight font-montserrat">PokeAstro</span>
+        </a>
+
+        <nav class="flex items-center gap-2">
+          <a 
+            href="/" 
+            class="px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:text-emerald-600 hover:bg-gray-100/80 transition"
+          >
+            Portada
+          </a>
+          <a 
+            href="/carrousel" 
+            class="px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:text-emerald-600 hover:bg-gray-100/80 transition"
+          >
+            Carrusel React
+          </a>
+          <a 
+            href="/ssg" 
+            class="px-4 py-2 rounded-xl text-sm font-bold text-gray-600 hover:text-emerald-600 hover:bg-gray-100/80 transition"
+          >
+            SSG Prado
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    {/* Content */}
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    {/* Elegant Footer */}
+    <footer class="bg-white border-t border-gray-200 py-8 text-center text-sm text-gray-500">
+      <p class="font-montserrat font-semibold">© 2026 PokeAstro E-Commerce. Impulsado por Astro Islands & Static Site Generation.</p>
+      <p class="mt-2 text-xs text-gray-450">Entrega 3 - SSBW. Generación de Sitios Estáticos e Integración Híbrida.</p>
+    </footer>
+  </body>
+</html>

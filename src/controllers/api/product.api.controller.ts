@@ -135,7 +135,15 @@ export const getRandomImage = async (req: Request, res: Response): Promise<void>
     }
     
     const randomProduct = products[Math.floor(Math.random() * products.length)];
-    res.status(200).json({ success: true, data: { imageUrl: randomProduct.imageUrl, name: randomProduct.name } });
+    res.status(200).json({ 
+      success: true, 
+      data: { 
+        id: randomProduct.id, 
+        imageUrl: randomProduct.imageUrl, 
+        name: randomProduct.name,
+        price: randomProduct.price
+      } 
+    });
   } catch (error) {
     logger.error('Error fetching random image', error);
     res.status(500).json({ success: false, error: 'Internal server error' });

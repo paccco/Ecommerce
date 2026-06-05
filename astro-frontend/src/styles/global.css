@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=EB+Garamond:ital@0;1&display=swap");
 @import "tailwindcss";
-@plugin "../node_modules/daisyui/index.js";
+@plugin "../../node_modules/daisyui/index.js";
 
 @theme {
-  --font-montserrat: "Montserrat", sans-serif; 
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-garamond: "EB Garamond", serif;
 }
